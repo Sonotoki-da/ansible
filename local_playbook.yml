@@ -1,0 +1,27 @@
+---
+- hosts: 127.0.0.1
+  pre_tasks:
+    - name: Get the non-root user name
+      set_fact:
+        regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+
+    - name: Install base-devel
+      community.general.pacman:
+        name: base-devel
+        state: present
+
+  tasks:
+    - name: Play needed tasks in order
+      include_tasks: "{{ playbooks }}"
+      loop:
+        - ./tasks/dotfiles.yml
+        - ./tasks/core.yml
+        - ./tasks/apps.yml
+        - ./tasks/fcitx5.yml
+        - ./tasks/spotify.yml
+      loop_control:
+        loop_var: playbooks
+
+    - name: Reboot the system
+      become: true
+      ansible.builtin.shell: reboot now

@@ -1,0 +1,11 @@
+- name: Install productivity apps
+  become: true
+  community.general.pacman:
+    name:
+      - telegram-desktop
+      - discord
+      - krita
+      - kdenlive
+      - tealdeer
+      - libreoffice-fresh
+    state: present

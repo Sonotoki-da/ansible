@@ -1,0 +1,14 @@
+- name: Install core utils
+  become: true
+  community.general.pacman:
+    name:
+      - neovim
+      - stow
+      - vifm
+      - tmux
+      - fzf
+      - ripgrep
+      - lazygit
+      - nodejs
+      - npm
+    state: present

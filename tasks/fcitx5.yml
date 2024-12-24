@@ -1,0 +1,41 @@
+- name: Install fcitx5 group
+  become: true
+  community.general.pacman:
+    name:
+      - fcitx5-im
+      - fcitx5-mozc
+      - fcitx5-chinese-addons
+    state: present
+
+- name: Add necessary locales to /etc/locale.gen
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/locale.gen
+    line: "{{ locale }}"
+  loop:
+    - "\nko_KR.UTF-8 UTF-8"
+    - ja_JP.UTF-8 UTF-8
+    - zh_CN.UTF-8 UTF-8
+    - zh_HK.UTF-8 UTF-8
+    - zh_TW.UTF-8 UTF-8
+    - zh_SG.UTF-8 UTF-8
+  loop_control:
+    loop_var: locale
+
+- name: Generate locales
+  become: true
+  ansible.builtin.shell: locale-gen
+
+- name: Fcitx5's permanent system-wide environment variables
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/environment
+    line: "{{ fcitx_env }}"
+  loop:
+    - "\n# fcitx5"
+    - GTK_IM_MODULE=fcitx
+    - QT_IM_MODULE=fcitx
+    - SDL_IM_MODULE=fcitx
+    - XMODIFIERS=@im=fcitx
+  loop_control:
+    loop_var: fcitx_env

@@ -1,0 +1,29 @@
+- name: Install stow
+  community.general.pacman:
+    name: stow
+    state: present
+
+- name: Cloning .dotfiles
+  become: true
+  become_user: "{{ regular_user }}"
+  ansible.builtin.git:
+    repo: "https://github.com/sonotoki-da/.dotfiles"
+    dest: "/home/{{ regular_user }}/.dotfiles"
+    update: true
+    accept_hostkey: true
+    version: master
+
+- name: Remove .zshenv
+  ansible.builtin.file:
+    path: "/home/{{ regular_user }}/.zshenv"
+    state: absent
+
+- name: Remove nvim dir
+  ansible.builtin.file:
+    path: "/home/{{ regular_user }}/.config/nvim"
+    state: absent
+
+- name: Stow dotfiles
+  become: true
+  become_user: "{{ regular_user }}"
+  ansible.builtin.shell: cd /home/"{{ regular_user }}"/.dotfiles && ./manjaro_sway

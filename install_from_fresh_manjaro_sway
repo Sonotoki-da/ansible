@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+rm -rf /etc/pacman.d/gnupg
+pacman-key --init
+pacman-key --populate archlinux manjaro
+pacman --noconfirm -Sy gnupg archlinux-keyring manjaro-keyring
+pacman --noconfirm -Syu
+
+pacman --noconfirm -S ansible
+ansible-playbook ./local_playbook.yml -vvvv
