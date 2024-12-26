@@ -50,7 +50,7 @@
       resume=`findmnt -no UUID -T /swapfile`
       resume_offset=`filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}'`
       if [[ -n "$resume_offset" ]]; then
-        sed -i "s/\(.*DEFAULT.*\)\(\"$\)/\1 resume=$resume resume_offset=$resume_offset\2/" /etc/default/grub
+        sed -i "s/\(.*DEFAULT.*\)\(\"$\)/\1 resume=UUID=$resume resume_offset=$resume_offset\2/" /etc/default/grub
         grub-mkconfig -o /boot/grub/grub.cfg
       else
         echo "Error: Could not determine resume_offset from filefrag output."
