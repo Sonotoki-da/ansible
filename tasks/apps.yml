@@ -8,4 +8,33 @@
       - kdenlive
       - tealdeer
       - libreoffice-fresh
+      - anki
     state: present
+
+- name: Check if anki is installed
+  ansible.builtin.command: which anki
+  register: anki_check
+  ignore_errors: true
+
+- name: Clone the anki AUR repository
+  become: true
+  become_user: aur_builder
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/anki.git
+    dest: /tmp/anki
+    force: true
+  when: anki_check.rc != 0
+
+- name: Build and install anki
+  become: true
+  become_user: aur_builder
+  ansible.builtin.command: makepkg -si --noconfirm
+  args:
+    chdir: /tmp/anki
+  when: anki_check.rc != 0
+
+- name: Clean up the build directory
+  become: true
+  ansible.builtin.file:
+    path: /tmp/anki
+    state: absent
