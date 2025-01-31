@@ -8,7 +8,6 @@
       - kdenlive
       - tealdeer
       - libreoffice-fresh
-      - anki
     state: present
 
 - name: Check if anki is installed
