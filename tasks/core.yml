@@ -11,4 +11,5 @@
       - lazygit
       - nodejs
       - npm
+      - unzip
     state: present
