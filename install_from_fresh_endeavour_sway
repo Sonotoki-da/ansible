@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+pacman --noconfirm -Syu
+
+pacman --noconfirm -S ansible
+ansible-playbook ./local_playbook.yml -vvvv
