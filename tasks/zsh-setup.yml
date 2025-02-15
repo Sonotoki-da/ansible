@@ -24,3 +24,8 @@
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
   become: true
   become_user: "{{ regular_user }}"
+
+- name: Enable zsh-autosuggestions
+  shell: sed -i 's/git)/git, zsh-autosuggestions)/' ~/.zshrc
+  become: true
+  become_user: "{{ regular_user }}"
