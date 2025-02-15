@@ -11,7 +11,7 @@
     dest: "/home/{{ regular_user }}/.dotfiles"
     update: true
     accept_hostkey: true
-    version: master
+    version: endeavour_sway
 
 - name: Remove nvim dir
   ansible.builtin.file:
@@ -21,4 +21,4 @@
 - name: Stow dotfiles
   become: true
   become_user: "{{ regular_user }}"
-  ansible.builtin.shell: cd /home/"{{ regular_user }}"/.dotfiles && ./manjaro_sway
+  ansible.builtin.shell: cd /home/"{{ regular_user }}"/.dotfiles && ./EXECUTE_ME
