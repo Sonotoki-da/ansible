@@ -28,6 +28,7 @@
     - name: Play needed tasks in order
       include_tasks: "{{ playbooks }}"
       loop:
+        - ./tasks/zsh-setup.yml
         - ./tasks/dotfiles.yml
         - ./tasks/core.yml
         - ./tasks/apps.yml

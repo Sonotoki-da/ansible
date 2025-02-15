@@ -1,3 +1,10 @@
+- name: Uninstall some Endevaour default apps
+  become: true
+  community.general.pacman:
+    name:
+      - tldr
+    state: absent
+
 - name: Install productivity apps
   become: true
   community.general.pacman:

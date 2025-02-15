@@ -12,5 +12,5 @@
       - nodejs
       - npm
       - unzip
-      - gh
+      - github-cli
     state: present

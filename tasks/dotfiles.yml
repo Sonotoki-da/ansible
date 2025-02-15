@@ -13,11 +13,6 @@
     accept_hostkey: true
     version: master
 
-- name: Remove .zshenv
-  ansible.builtin.file:
-    path: "/home/{{ regular_user }}/.zshenv"
-    state: absent
-
 - name: Remove nvim dir
   ansible.builtin.file:
     path: "/home/{{ regular_user }}/.config/nvim"
