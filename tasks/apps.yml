@@ -16,6 +16,10 @@
       - tealdeer
       - libreoffice-fresh
       - qbittorrent
+      - zathura
+      - zathura-pdf-poppler
+      - btop
+      - bat
     state: present
 
 - name: Check if anki is installed
