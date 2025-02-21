@@ -20,6 +20,7 @@
       - zathura-pdf-poppler
       - btop
       - bat
+      - mpv
     state: present
 
 - name: Check if anki is installed
