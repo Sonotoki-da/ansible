@@ -55,7 +55,7 @@
     content: |
       #!/bin/bash
 
-      display=wayland-0
+      display=:0
       uid=`id -u {{ regular_user }}`
       address="unix:path=/run/user/$uid/bus"
 

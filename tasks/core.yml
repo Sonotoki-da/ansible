@@ -13,6 +13,7 @@
       - npm
       - unzip
       - github-cli
-      - wtype
       - zig
+      - ghostty
+      - xclip
     state: present
