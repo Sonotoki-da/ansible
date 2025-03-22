@@ -16,4 +16,5 @@
       - zig
       - ghostty
       - xclip
+      - xdotool
     state: present
