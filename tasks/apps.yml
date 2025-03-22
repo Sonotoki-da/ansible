@@ -22,6 +22,7 @@
       - bat
       - mpv
       - nvidia-settings
+      - flameshot
     state: present
 
 - name: Check if anki is installed
