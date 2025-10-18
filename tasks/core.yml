@@ -15,6 +15,6 @@
       - github-cli
       - zig
       - ghostty
-      - xclip
-      - xdotool
+      - zf
+      - cliphist
     state: present

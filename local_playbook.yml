@@ -35,6 +35,7 @@
         - ./tasks/fcitx5.yml
         - ./tasks/spotify.yml
         - ./tasks/hibernation.yml
+        - ./tasks/river.yml
       loop_control:
         loop_var: playbooks
 

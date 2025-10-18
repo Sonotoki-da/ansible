@@ -1,0 +1,33 @@
+- name: Install River depdendencies
+  become: true
+  community.general.pacman:
+    name:
+      - wayland
+      - wayland-protocols
+      - wlroots
+      - xkbcommon
+      - libevdev
+      - pixman
+      - pkg-config
+      - scdoc
+      - ly
+    state: present
+
+- name: Enable ly.service
+  become: true
+  command: systemctl enable ly.service
+
+- name: Clone River
+  become: true
+  become_user: aur_builder
+  ansible.builtin.git:
+    repo: https://codeberg.org/river/river.git
+    dest: /home/{{ regular_user }}/river
+    force: true
+
+- name: Build and install River
+  become: true
+  become_user: aur_builder
+  ansible.builtin.command: zig build -Doptimize=ReleaseFast
+  args:
+    chdir: /home/{{ regular_user }}/river
